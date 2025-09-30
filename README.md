@@ -1,6 +1,4 @@
-# [WAVS](https://docs.wavs.xyz) Symbient
-
-TOP SECRET: a collection of fundraising, governance, and incentive mechanisms for cybernetic organisms.
+# [WAVS](https://docs.wavs.xyz) CLOB Example
 
 ### Solidity
 
@@ -96,10 +94,10 @@ TOKEN_B=`echo "$OUTPUT_B" | grep 'Token Address: 0x' | awk '{print $3}'`
 echo "TOKEN_A (Base): $TOKEN_A"
 echo "TOKEN_B (Quote): $TOKEN_B"
 
-# Approve tokens for CLOB contract
 echo "Approving tokens for CLOB..."
 cast send $TOKEN_A "approve(address,uint256)" $CLOB_ADDR 1000000000000000000000000 --rpc-url http://localhost:8545 --private-key $FUNDED_KEY &> /dev/null
 cast send $TOKEN_B "approve(address,uint256)" $CLOB_ADDR 1000000000000000000000000 --rpc-url http://localhost:8545 --private-key $FUNDED_KEY &> /dev/null
+# .
 ```
 
 ## Clob Perform Logic
@@ -123,6 +121,18 @@ docker logs wavs-1
 # Check orders
 echo "Checking order #1:"
 ORDER_1=`cast call $CLOB_ADDR "getOrder(uint256)" 1 --rpc-url http://localhost:8545`
+# EXAMPLE; === Decoded Order #1 ===
+# ID: 1
+# Trader: 0x0x61379a9a939993bf8ba11b561907ce312d747464
+# Order Type: SELL (1)
+# Base Token: 0x0x720076a6fb0a7cf89a84ede5ed8bc0ab05ab7eea
+# Quote Token: 0x0xf86d10dfb6c6d23e9a2af912375be233d72bd91c
+# Price: 2.000000000000000000 ETH (2000000000000000000 wei)
+# Amount: 100.000000000000000000 ETH (100000000000000000000 wei)
+# Filled Amount: 50.000000000000000000 ETH (50000000000000000000 wei)
+# Status: PARTIALLY_FILLED (1)
+# Timestamp: Tue Sep 30 10:31:20 CDT 2025
+# Fill Percentage: 50.00%
 sh decode_order.sh "$ORDER_1"
 
   echo "Checking order #2:"

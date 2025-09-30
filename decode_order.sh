@@ -80,7 +80,7 @@ decode_order() {
     echo "Timestamp: $date_str"
 
     # Calculate fill percentage if amount > 0
-    if [ "$amount_wei" -gt 0 ]; then
+    if [ "$amount_wei" != "0" ] && [ -n "$amount_wei" ]; then
         local fill_percentage=$(echo "scale=2; $filled_amount_wei * 100 / $amount_wei" | bc -l 2>/dev/null || echo "N/A")
         echo "Fill Percentage: ${fill_percentage}%"
     fi
